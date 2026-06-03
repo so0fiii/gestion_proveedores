@@ -16,6 +16,18 @@ services:
     volumes:
       - database_data:/var/lib/mysql
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2
+    environment:
+      PMA_HOST: database
+      PMA_USER: ${MYSQL_USER:-app}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-app}
+    ports:
+      - "8081:80"
+    depends_on:
+      database:
+        condition: service_healthy
+
 
 volumes:
   database_data:
