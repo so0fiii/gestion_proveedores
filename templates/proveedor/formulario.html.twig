@@ -1,0 +1,62 @@
+{# Vista reutilizada para crear y editar proveedores. #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block body %}
+    <section class="page-header">
+        <div>
+            <p class="page-kicker">Gestion de proveedores</p>
+            <h1>{{ titulo }}</h1>
+            <p class="form-help">
+                Los campos marcados con <span>*</span> son obligatorios.
+            </p>
+        </div>
+
+        <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
+            Volver al listado
+        </a>
+    </section>
+
+    <section class="form-panel">
+        {{ form_start(form) }}
+            <div class="form-grid">
+                <div class="form-field">
+                    <label for="{{ form.nombre.vars.id }}">Nombre <span>*</span></label>
+                    {{ form_widget(form.nombre) }}
+                    {{ form_errors(form.nombre) }}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ form.nombre.vars.id }}">Nombre <span>*</span></label>
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ form.telefono.vars.id }}">Telefono de contacto <span>*</span></label>
+                    {{ form_widget(form.telefono) }}
+                    {{ form_errors(form.telefono) }}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ form.tipo.vars.id }}">Tipo de proveedor <span>*</span></label>
+                    {{ form_widget(form.tipo) }}
+                    {{ form_errors(form.tipo) }}
+                </div>
+
+                <div class="form-field form-field--checkbox">
+                    {{ form_widget(form.activo) }}
+                    {{ form_label(form.activo) }}
+                    {{ form_errors(form.activo) }}
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="button button--primary" type="submit">
+                    {{ texto_boton }}
+                </button>
+            </div>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

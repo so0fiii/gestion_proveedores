@@ -10,9 +10,15 @@
             <h1>{{ proveedor.nombre }}</h1>
         </div>
 
-        <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
-            Volver al listado
-        </a>
+        <div class="button-group">
+            <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
+                Volver al listado
+            </a>
+
+            <a class="button button--primary" href="{{ path('proveedor_editar', { id: proveedor.id }) }}">
+                Editar proveedor
+            </a>
+        </div>
     </section>
 
     <section class="detail-grid">
