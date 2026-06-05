@@ -32,13 +32,16 @@
                         <th>Tipo</th>
                         <th>Estado</th>
                         <th>Actualizado</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for proveedor in proveedores %}
-                        <tr>
-                            <td>{{ proveedor.nombre }}</td>
+                        <tr class="data-table__row data-table__row--clickable" data-href="{{ path('proveedor_detalle', { id: proveedor.id}) }}">
+                            <td>
+                                <a class="row-link" href="{{ path('proveedor_detalle', { id: proveedor.id}) }}">
+                                    {{ proveedor.nombre }}
+                                </a>
+                            </td>
                             <td>{{ proveedor.email }}</td>
                             <td>{{ proveedor.telefono }}</td>
                             <td>{{ proveedor.tipo.label }}</td>
@@ -50,11 +53,6 @@
                                 {% endif %}
                             </td>
                             <td>{{ proveedor.updatedAt|date('d/m/Y H:i') }}</td>
-                            <td>
-                                <a class="link-action" href="{{ path('proveedor_detalle', { id: proveedor.id }) }}">
-                                    Ver detalle
-                                </a>
-                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

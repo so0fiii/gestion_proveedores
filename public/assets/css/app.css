@@ -323,16 +323,38 @@ a {
     gap: 10px;
 }
 
+/* Filas clicables del listado de proveedores. */
 .data-table__row {
     transition: background-color 0.15s ease;
 }
 
-.data-table__row:hover {
+.data-table__row--clickable {
+    position: relative;
+    cursor: pointer;
+}
+
+.data-table__row--clickable:hover {
     background: #f8fafc;
 }
 
-.data-table__row:hover .row-link {
-    text-decoration: underline;
+.data-table__row--clickable td {
+    transition: background-color 0.15s ease;
+}
+
+.data-table__row--clickable:hover td {
+    background: #f8fafc;
+}
+
+.data-table__row--clickable::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 340px;
+    bottom: 16px;
+    height: 2px;
+    background: transparent;
+    transition: background-color 0.15s ease;
+    pointer-events: none;
 }
 
 .row-link {
@@ -341,3 +363,6 @@ a {
     text-decoration: none;
 }
 
+.data-table__row--clickable:hover::after {
+    background: #cfd8e3;
+}
