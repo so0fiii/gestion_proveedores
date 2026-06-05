@@ -1,0 +1,53 @@
+{# Vista de detalle de un proveedor concreto. #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle del proveedor{% endblock %}
+
+{% block body %}
+    <section class="page-header">
+        <div>
+            <p class="page-kicker">Detalle del proveedor</p>
+            <h1>{{ proveedor.nombre }}</h1>
+        </div>
+
+        <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
+            Volver al listado
+        </a>
+    </section>
+
+    <section class="detail-grid">
+        <article class="detail-item">
+            <span>Correo electronico</span>
+            <strong>{{ proveedor.email }}</strong>
+        </article>
+
+        <article class="detail-item">
+            <span>Telefono</span>
+            <strong>{{ proveedor.telefono }}</strong>
+        </article>
+
+        <article class="detail-item">
+            <span>Tipo</span>
+            <strong>{{ proveedor.tipo.label }}</strong>
+        </article>
+
+        <article class="detail-item">
+            <span>Estado</span>
+            {% if proveedor.activo %}
+                <strong>Activo</strong>
+            {% else %}
+                <strong>Inactivo</strong>
+            {% endif %}
+        </article>
+
+        <article class="detail-item">
+            <span>Fecha de creacion</span>
+            <strong>{{ proveedor.createdAt|date('d/m/Y H:i') }}</strong>
+        </article>
+
+        <article class="detail-item">
+            <span>Ultima actualizacion</span>
+            <strong>{{ proveedor.updatedAt|date('d/m/Y H:i') }}</strong>
+        </article>
+    </section>
+{% endblock %}

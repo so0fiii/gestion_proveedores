@@ -1,0 +1,61 @@
+{# Hereda el layout general de la aplicacion. #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de proveedores{% endblock %}
+
+{% block body %}
+    <section class="page-header">
+        <div>
+            <p class="page-kicker">Panel de administracion</p>
+            <h1>Listado de proveedores</h1>
+        </div>
+    </section>
+
+    {# Si no hay proveedores, mostramos un estado vacio. #}
+    {% if proveedores is empty %}
+        <div class="empty-state">
+            <h2>No hay proveedores registrados</h2>
+            <p>Cuando se creen proveedores apareceran listados en esta pantalla.</p>
+        </div>
+    {% else %}
+        {# La tabla queda dentro de un contenedor para permitir scroll horizontal en movil. #}
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo electronico</th>
+                        <th>Telefono</th>
+                        <th>Tipo</th>
+                        <th>Estado</th>
+                        <th>Actualizado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for proveedor in proveedores %}
+                        <tr>
+                            <td>{{ proveedor.nombre }}</td>
+                            <td>{{ proveedor.email }}</td>
+                            <td>{{ proveedor.telefono }}</td>
+                            <td>{{ proveedor.tipo.label }}</td>
+                            <td>
+                                {% if proveedor.activo %}
+                                    <span class="status status--active">Activo</span>
+                                {% else %}
+                                    <span class="status status--inactive">Inactivo</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ proveedor.updatedAt|date('d/m/Y H:i') }}</td>
+                            <td>
+                                <a class="link-action" href="{{ path('proveedor_detalle', { id: proveedor.id }) }}">
+                                    Ver detalle
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

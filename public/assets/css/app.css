@@ -77,3 +77,140 @@ a {
         padding: 24px 16px;
     }
 }
+
+/* Cabecera interna de cada pantalla. */
+.page-header {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.page-kicker {
+    margin: 0 0 6px;
+    color: var(--color-muted);
+    font-size: 14px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+/* Estado vacio para listas sin datos. */
+.empty-state {
+    padding: 32px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.empty-state h2 {
+    margin-top: 0;
+}
+
+/* Contenedor responsive para tablas anchas. */
+.table-wrapper {
+    overflow-x: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+}
+
+.data-table th {
+    font-size: 13px;
+    color: var(--color-muted);
+    background: #f8fafc;
+}
+
+/* Etiquetas de estado activo/inactivo. */
+.status {
+    display: inline-flex;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.status--active {
+    color: #166534;
+    background: #dcfce7;
+}
+
+.status--inactive {
+    color: #991b1b;
+    background: #fee2e2;
+}
+
+.link-action {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.button--secondary {
+    color: var(--color-text);
+    background: var(--color-surface);
+    border-color: var(--color-border);
+}
+
+/* Grid de la pantalla de detalle. */
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.detail-item {
+    padding: 18px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.detail-item span {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-muted);
+    font-size: 14px;
+}
+
+.detail-item strong {
+    display: block;
+}
+
+@media (max-width: 640px) {
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
