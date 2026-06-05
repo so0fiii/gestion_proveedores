@@ -301,3 +301,43 @@ a {
 .form-field label span {
     color: #b91c1c;
 }
+
+.button--danger {
+    color: #ffffff;
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+.button--danger:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+}
+
+.button-group form {
+    margin: 0;
+}
+
+.table-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.data-table__row {
+    transition: background-color 0.15s ease;
+}
+
+.data-table__row:hover {
+    background: #f8fafc;
+}
+
+.data-table__row:hover .row-link {
+    text-decoration: underline;
+}
+
+.row-link {
+    color: var(--color-text);
+    font-weight: 700;
+    text-decoration: none;
+}
+

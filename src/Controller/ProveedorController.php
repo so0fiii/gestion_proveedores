@@ -10,12 +10,13 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Form\ProveedorFormType;
 use App\Service\ProveedorService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 #[Route('/proveedores', name: 'proveedor_')]
 class ProveedorController extends AbstractController
 {
     #[Route('', name: 'listado', methods: ['GET'])]
-    public function index(ProveedorRepository $proveedorRepository): Response
+    public function listado(ProveedorRepository $proveedorRepository): Response
     {
         return $this->render('proveedor/listado.html.twig', [
             'proveedores' => $proveedorRepository->findAllOrderedByName(),
@@ -23,15 +24,13 @@ class ProveedorController extends AbstractController
     }
 
     #[Route('/{id}', name: 'detalle', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function show(Proveedor $proveedor): Response
+    public function detalle(Proveedor $proveedor): Response
     {
         return $this->render('proveedor/detalle.html.twig', [
             'proveedor' => $proveedor,
         ]);
     }
 
-    // Ruta GET y POST /proveedores/nuevo.
-    // Muestra y procesa el formulario para crear un proveedor.
     #[Route('/nuevo', name: 'nuevo', methods: ['GET', 'POST'])]
     public function nuevo(Request $request, ProveedorService $proveedorService): Response
     {
@@ -55,8 +54,6 @@ class ProveedorController extends AbstractController
         ]);
     }
 
-    // Ruta GET y POST /proveedores/{id}/editar.
-    // Muestra y procesa el formulario para editar un proveedor existente.
     #[Route('/{id}/editar', name: 'editar', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function editar(Request $request, Proveedor $proveedor, ProveedorService $proveedorService): Response
     {
@@ -78,5 +75,23 @@ class ProveedorController extends AbstractController
             'titulo' => 'Editar proveedor',
             'texto_boton' => 'Guardar cambios',
         ]);
+    }
+
+    #[Route('/{id}/eliminar', name: 'eliminar', requirements: ['id' => '\d+'], methods: ['POST'])]
+    public function eliminar(Request $request, Proveedor $proveedor, ProveedorService $proveedorService): Response
+    {
+        if (!$this->isCsrfTokenValid('eliminar_proveedor_' . $proveedor->getId(), (string) $request->request->get('_token'))) {
+            $this->addFlash('error', 'No se ha podido validar la solicitud de eliminacion.');
+
+            return $this->redirectToRoute('proveedor_detalle', [
+                'id' => $proveedor->getId(),
+            ]);
+        }
+
+        $proveedorService->eliminar($proveedor);
+
+        $this->addFlash('success', 'Proveedor eliminado correctamente.');
+
+        return $this->redirectToRoute('proveedor_listado');
     }
 }

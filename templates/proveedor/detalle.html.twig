@@ -18,6 +18,14 @@
             <a class="button button--primary" href="{{ path('proveedor_editar', { id: proveedor.id }) }}">
                 Editar proveedor
             </a>
+
+
+            <form method="post" action="{{ path('proveedor_eliminar', { id: proveedor.id }) }}" onsubmit="return confirm('¿Seguro que quieres eliminar este proveedor?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('eliminar_proveedor_' ~ proveedor.id) }}">
+                <button class="button button--danger" type="submit">
+                    Eliminar proveedor
+                </button>
+            </form>
         </div>
     </section>
 
