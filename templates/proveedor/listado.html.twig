@@ -14,6 +14,53 @@
         </a>
     </section>
 
+    <form class="filters-panel" method="get" action="{{ path('proveedor_listado')}}">
+        <div class="filters-grid">
+            <div class="form-field">
+                <label for="busqueda">Buscar</label>
+                <input
+                    type="search"
+                    id="busqueda"
+                    name="busqueda"
+                    value="{{ filtros.busqueda }}"
+                    placeholder="Nombre, correo o telefono"
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="tipo">Tipo</label>
+                <select id="tipo" name="tipo">
+                    <option value="">Todos</option>
+                    {% for tipo in tipos_proveedor %}
+                        <option value="{{ tipo.value }}" {% if filtros.tipo == tipo.value %}selected{% endif %}>
+                            {{ tipo.label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado">
+                    <option value="">Todos</option>
+                    <option value="activo" {% if filtros.estado == 'activo' %}selected{% endif %}>Activos</option>
+                    <option value="inactivo" {% if filtros.estado == 'inactivo' %}selected{% endif %}>Inactivos</option>
+                </select>
+            </div>
+
+            <div class="filters-actions">
+                <button class="button button--primary" type="submit">
+                    Filtrar
+                </button>
+
+                <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
+                    Limpiar
+                </a>
+            </div>
+        </div>
+    </form>
+
+
     {# Si no hay proveedores, mostramos un estado vacio. #}
     {% if proveedores is empty %}
         <div class="empty-state">

@@ -11,15 +11,26 @@ use App\Form\ProveedorFormType;
 use App\Service\ProveedorService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Enum\TipoProveedor;
 
 #[Route('/proveedores', name: 'proveedor_')]
 class ProveedorController extends AbstractController
 {
     #[Route('', name: 'listado', methods: ['GET'])]
-    public function listado(ProveedorRepository $proveedorRepository): Response
+    public function listado(Request $request, ProveedorRepository $proveedorRepository): Response
     {
+        $busqueda = trim((string) $request->query->get('busqueda', ''));
+        $tipo = (string) $request->query->get('tipo', '');
+        $estado = (string) $request->query->get('estado', '');
+
         return $this->render('proveedor/listado.html.twig', [
-            'proveedores' => $proveedorRepository->findAllOrderedByName(),
+            'proveedores' => $proveedorRepository->findByFilters($busqueda, $tipo, $estado),
+            'tipos_proveedor' => TipoProveedor::cases(),
+            'filtros' => [
+                'busqueda' => $busqueda,
+                'tipo' => $tipo,
+                'estado' => $estado,
+            ],
         ]);
     }
 
@@ -94,4 +105,8 @@ class ProveedorController extends AbstractController
 
         return $this->redirectToRoute('proveedor_listado');
     }
+
+
 }
+
+

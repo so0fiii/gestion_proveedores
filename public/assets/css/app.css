@@ -418,3 +418,43 @@ a {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.filters-panel {
+    margin-bottom: 20px;
+    padding: 18px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 16px;
+    align-items: end;
+}
+
+.filters-actions {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 900px) {
+    .filters-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .filters-actions {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .filters-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-actions {
+        flex-direction: column;
+    }
+}
