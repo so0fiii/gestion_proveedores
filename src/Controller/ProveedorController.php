@@ -57,7 +57,9 @@ class ProveedorController extends AbstractController
 
             $this->addFlash('success', 'Proveedor creado correctamente.');
 
-            return $this->redirectToRoute('proveedor_listado');
+            return $this->redirectToRoute('proveedor_detalle', [
+                'id' => $proveedor->getId(),
+            ]);
         }
 
         return $this->render('proveedor/formulario.html.twig', [
