@@ -4,12 +4,11 @@
 {% block title %}{{ titulo }}{% endblock %}
 
 {% block body %}
-    <section class="page-header">
+    <section class="page-header page-header--form">
         <div>
-            <p class="page-kicker">Gestion de proveedores</p>
             <h1>{{ titulo }}</h1>
             <p class="form-help">
-                Los campos marcados con <span>*</span> son obligatorios.
+                Los campos marcados con (<span>*</span>) son obligatorios.
             </p>
         </div>
 
@@ -45,17 +44,19 @@
                     {{ form_errors(form.tipo) }}
                 </div>
 
-                <div class="form-field form-field--checkbox">
-                    {{ form_widget(form.activo) }}
-                    {{ form_label(form.activo) }}
-                    {{ form_errors(form.activo) }}
-                </div>
-            </div>
+                <div class="form-footer">
+                    <div class="form-field form-field--checkbox">
+                        {{ form_widget(form.activo) }}
+                        {{ form_label(form.activo) }}
+                        {{ form_errors(form.activo) }}
+                    </div>
 
-            <div class="form-actions">
-                <button class="button button--primary" type="submit">
-                    {{ texto_boton }}
-                </button>
+                    <div class="form-actions">
+                        <button class="button button--primary" type="submit">
+                            {{ texto_boton }}
+                        </button>
+                    </div>
+                </div>
             </div>
         {{ form_end(form) }}
     </section>
