@@ -8,15 +8,17 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <header class="site-header">
-            <nav class="site-nav">
-                <a class="site-logo" href="/">Gestión de proveedores</a>
+        {% block header %}
+            <header class="site-header">
+                <nav class="site-nav">
+                    <a class="site-logo" href="/">Gestión de proveedores</a>
 
-                <div class="site-nav__links">
-                    <a href="#">Proveedores</a>
-                </div>
-            </nav>
-        </header>
+                    <div class="site-nav__links">
+                        <a href="#">Proveedores</a>
+                    </div>
+                </nav>
+            </header>
+        {% endblock %}
 
         <main class="site-main">
             {% for label, messages in app.flashes %}

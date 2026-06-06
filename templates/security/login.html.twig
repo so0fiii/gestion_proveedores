@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Iniciar sesión{% endblock %}
+{% block header %}{% endblock %}
+{% block body %}
+    <section class="login-page">
+        <form class="login-card" method="post">
+            <div class="login-card__header">
+                <h1>GESTIÓN DE PROVEEDORES</h1>
+                <h2>Inicie sesión con sus credenciales</h2>
+            </div>
+
+            {% if error %}
+                <div class="flash flash--error">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="flash flash--success">
+                    Has iniciado sesión como {{ app.user.userIdentifier }}.
+                </div>
+            {% endif %}
+
+            <div class="form-field">
+                <label for="username">Correo electrónico</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
+            </div>
+
+            <div class="form-field">
+                <label for="password">Contraseña</label>
+                <input type="password" name="_password" id="password" autocomplete="current-password" required>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button class="button button--primary login-card__submit" type="submit">
+                Entrar
+            </button>
+        </form>
+    </section>
+{% endblock %}
