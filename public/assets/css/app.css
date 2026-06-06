@@ -617,6 +617,11 @@ a {
 }
 
 @media (max-width: 640px) {
+
+    .site-header {
+        display: none;
+    }
+    
     .site-nav,
     .page-header {
         align-items: flex-start;
@@ -627,12 +632,107 @@ a {
         padding: 24px 16px;
     }
 
-    .form-grid,
+    .page-header,
+    .page-actions,
+    .filters-actions,
+    .form-actions,
+    .form-footer {
+        width: 100%;
+    }
+
+    .page-actions,
+    .filters-actions,
+    .form-actions,
+    .form-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .button,
+    .filters-actions .button,
+    .form-footer .button {
+        width: 100%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-panel {
+        padding: 14px;
+    }
+
+    .filters-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .filters-grid .form-field:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .filters-actions {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .data-table {
+        min-width: 0;
+    }
+
+    .data-table th:not(:first-child),
+    .data-table td:not(:first-child) {
+        display: none;
+    }
+
+    .data-table th:first-child,
+    .data-table td:first-child {
+        width: 100%;
+    }
+
+    .data-table__row--clickable::after {
+        right: 15px;
+    }
+
+    .detail-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .detail-title-row h1 {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .detail-title-actions {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .detail-value,
+    .detail-row dd {
+        font-size: 14px;
+        overflow-wrap: anywhere;
+    }
+
+    .login-card {
+        padding: 28px 24px;
+    }
+}
+
+@media (max-width: 480px) {
     .filters-grid {
         grid-template-columns: 1fr;
     }
 
+    .filters-grid .form-field,
     .filters-actions {
-        flex-direction: column;
+        grid-column: 1;
+    }
+
+    .filters-actions {
+        grid-template-columns: 1fr;
     }
 }
