@@ -348,9 +348,9 @@ a {
 .data-table__row--clickable::after {
     content: "";
     position: absolute;
-    left: 16px;
+    left: 15px;
     right: 340px;
-    bottom: 16px;
+    bottom: 15px;
     height: 2px;
     background: transparent;
     transition: background-color 0.15s ease;
