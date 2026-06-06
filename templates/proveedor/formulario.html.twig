@@ -20,7 +20,7 @@
 
     <section class="form-panel">
         {{ form_start(form) }}
-            <div class="form-grid">
+            <div class="form-list">
                 <div class="form-field">
                     <label for="{{ form.nombre.vars.id }}">Nombre <span>*</span></label>
                     {{ form_widget(form.nombre) }}
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-field">
-                    <label for="{{ form.nombre.vars.id }}">Nombre <span>*</span></label>
+                    <label for="{{ form.email.vars.id }}">Email <span>*</span></label>
                     {{ form_widget(form.email) }}
                     {{ form_errors(form.email) }}
                 </div>
