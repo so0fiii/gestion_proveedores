@@ -18,18 +18,25 @@ class Proveedor
 
     #[ORM\Column(length: 150)]
     #[Assert\NotBlank(message: 'El nombre es obligatorio.')]
-    #[Assert\Length(max: 150, maxMessage: 'El nombre no puede superar los {{ limit }} caracteres.')]
+    #[Assert\Length(max: 200, maxMessage: 'El nombre no puede superar los {{ limit }} caracteres.')]
     private ?string $nombre = null;
 
     #[ORM\Column(length: 180)]
     #[Assert\NotBlank(message: 'El correo electronico es obligatorio.')]
     #[Assert\Email(message: 'Introduce un correo electronico valido.')]
+    #[Assert\Regex(
+        pattern: '/^[^\s@]+@[^\s@]+\.[^\s@]+$/',
+        message: 'El correo electronico debe incluir un dominio valido, por ejemplo contacto@empresa.com.'
+    )]
     #[Assert\Length(max: 180, maxMessage: 'El correo electronico no puede superar los {{ limit }} caracteres.')]
     private ?string $email = null;
 
     #[ORM\Column(length: 30)]
     #[Assert\NotBlank(message: 'El telefono es obligatorio.')]
-    #[Assert\Length(max: 30, maxMessage: 'El telefono no puede superar los {{ limit }} caracteres.')]
+    #[Assert\Regex(
+        pattern: '/^(?:\d{9}|\d{3} \d{3} \d{3})$/',
+        message: 'El telefono debe tener 9 digitos, por ejemplo 612345678 o 612 345 678.'
+    )]
     private ?string $telefono = null;
 
     #[ORM\Column(enumType: TipoProveedor::class)]
