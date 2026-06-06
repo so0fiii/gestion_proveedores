@@ -418,21 +418,7 @@ a {
     transition: background-color 0.15s ease;
 }
 
-.data-table__row--clickable::after {
-    content: "";
-    position: absolute;
-    left: 15px;
-    right: 340px;
-    bottom: 15px;
-    height: 2px;
-    background: transparent;
-    transition: background-color 0.15s ease;
-    pointer-events: none;
-}
 
-.data-table__row--clickable:hover::after {
-    background: #cfd8e3;
-}
 
 .row-link {
     color: var(--color-text);
@@ -621,7 +607,7 @@ a {
     .site-header {
         display: none;
     }
-    
+
     .site-nav,
     .page-header {
         align-items: flex-start;
@@ -663,8 +649,10 @@ a {
     }
 
     .filters-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.2fr auto;
+        gap: 16px;
+        align-items: end;
     }
 
     .filters-grid .form-field:first-child {

@@ -49,15 +49,6 @@
             </div>
 
             <div class="form-field">
-                <label for="estado">Estado</label>
-                <select id="estado" name="estado">
-                    <option value="">Todos</option>
-                    <option value="activo" {% if filtros.estado == 'activo' %}selected{% endif %}>Activos</option>
-                    <option value="inactivo" {% if filtros.estado == 'inactivo' %}selected{% endif %}>Inactivos</option>
-                </select>
-            </div>
-
-            <div class="form-field">
                 <label for="orden">Ordenar por</label>
                 <select id="orden" name="orden">
                     <option value="nombre_asc" {% if filtros.orden == 'nombre_asc' %}selected{% endif %}>Nombre A-Z</option>
