@@ -4,64 +4,94 @@
 {% block title %}Detalle del proveedor{% endblock %}
 
 {% block body %}
-    <section class="page-header">
-        <div>
-            <p class="page-kicker">Detalle del proveedor</p>
-            <h1>{{ proveedor.nombre }}</h1>
+    <div class="detail-layout">
+        <section class="page-header">
+            <div>
+                <p class="page-kicker">Información sobre el proveedor</p>
+                <div class="detail-title-row">
+                    <h1>{{ proveedor.nombre }}</h1>
+
+                    <div class="detail-title-actions">
+                        <a class="icon-button icon-button--edit" href="{{ path('proveedor_editar', { id: proveedor.id }) }}" aria-label="Editar proveedor" title="Editar proveedor">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0 0-3L17.5 5.5a2.1 2.1 0 0 0-3 0L4 16v4Z"></path>
+                                <path d="M13.5 6.5l4 4"></path>
+                            </svg>
+                        </a>
+
+                        <form method="post" action="{{ path('proveedor_eliminar', { id: proveedor.id }) }}" onsubmit="return confirm('¿Seguro que quieres eliminar este proveedor?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('eliminar_proveedor_' ~ proveedor.id) }}">
+                            <button class="icon-button icon-button--danger" type="submit" aria-label="Eliminar proveedor" title="Eliminar proveedor">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M3 6h18"></path>
+                                    <path d="M8 6V4h8v2"></path>
+                                    <path d="M6 6l1 15h10l1-15"></path>
+                                    <path d="M10 11v6"></path>
+                                    <path d="M14 11v6"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-actions">
+                <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
+                    Volver al listado
+                </a>
+
+            </div>
+        </section>
+
+
+        <div class="section-heading">
+            <h2>Datos del proveedor</h2>
         </div>
 
-        <div class="button-group">
-            <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
-                Volver al listado
-            </a>
+        <section class="detail-panel">
+            <dl class="detail-list">
+                <article class="detail-row">
+                    <dt>Correo electronico</dt>
+                    <dd class="detail-value">
+                        <span>{{ proveedor.email }}</span>
+                    </dd>
+                </article>
 
-            <a class="button button--primary" href="{{ path('proveedor_editar', { id: proveedor.id }) }}">
-                Editar proveedor
-            </a>
+                <article class="detail-row">
+                    <dt>Telefono</dt>
+                    <dd class="detail-value">
+                        <span>{{ proveedor.telefono }}</span>
+                    </dd>
+                </article>
 
+                <article class="detail-row">
+                    <dt>Tipo</dt>
+                    <dd class="detail-value">
+                        <span>{{ proveedor.tipo.value }}</span>
+                    </dd>
+                </article>
 
-            <form method="post" action="{{ path('proveedor_eliminar', { id: proveedor.id }) }}" onsubmit="return confirm('¿Seguro que quieres eliminar este proveedor?');">
-                <input type="hidden" name="_token" value="{{ csrf_token('eliminar_proveedor_' ~ proveedor.id) }}">
-                <button class="button button--danger" type="submit">
-                    Eliminar proveedor
-                </button>
-            </form>
-        </div>
-    </section>
+                <div class="detail-row">
+                    <dt>Estado</dt>
+                    <dd class="detail-value">
+                        {% if proveedor.activo %}
+                            <span class="status status--active">Activo</span>
+                        {% else %}
+                            <span class="status status--inactive">Inactivo</span>
+                        {% endif %}
+                    </dd>
+                </div>
 
-    <section class="detail-grid">
-        <article class="detail-item">
-            <span>Correo electronico</span>
-            <strong>{{ proveedor.email }}</strong>
-        </article>
+                <article class="detail-row">
+                    <dt>Fecha de creación</dt>
+                    <dd>{{ proveedor.createdAt|date('d/m/Y H:i') }}</dd>
+                </article>
 
-        <article class="detail-item">
-            <span>Telefono</span>
-            <strong>{{ proveedor.telefono }}</strong>
-        </article>
-
-        <article class="detail-item">
-            <span>Tipo</span>
-            <strong>{{ proveedor.tipo.label }}</strong>
-        </article>
-
-        <article class="detail-item">
-            <span>Estado</span>
-            {% if proveedor.activo %}
-                <strong>Activo</strong>
-            {% else %}
-                <strong>Inactivo</strong>
-            {% endif %}
-        </article>
-
-        <article class="detail-item">
-            <span>Fecha de creacion</span>
-            <strong>{{ proveedor.createdAt|date('d/m/Y H:i') }}</strong>
-        </article>
-
-        <article class="detail-item">
-            <span>Ultima actualizacion</span>
-            <strong>{{ proveedor.updatedAt|date('d/m/Y H:i') }}</strong>
-        </article>
-    </section>
+                <article class="detail-row">
+                    <dt>Última actualización</dt>
+                    <dd>{{ proveedor.updatedAt|date('d/m/Y H:i') }}</dd>
+                </article>
+            </dl>
+        </section>
+    </div>
 {% endblock %}
