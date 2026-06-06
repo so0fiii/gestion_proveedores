@@ -12,13 +12,7 @@
 
             {% if error %}
                 <div class="flash flash--error">
-                    {{ error.messageKey|trans(error.messageData, 'security') }}
-                </div>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="flash flash--success">
-                    Has iniciado sesión como {{ app.user.userIdentifier }}.
+                    Credenciales invalidas. Comprueba el correo electrónico y la contraseña.
                 </div>
             {% endif %}
 
