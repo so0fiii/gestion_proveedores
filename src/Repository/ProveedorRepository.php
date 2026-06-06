@@ -27,7 +27,7 @@ class ProveedorRepository extends ServiceEntityRepository
     /**
      * @return Proveedor[]
      */
-      public function findByFilters(?string $busqueda, ?string $tipo, ?string $estado): array
+      public function findByFilters(?string $busqueda, ?string $tipo, ?string $estado, string $orden = 'nombre_asc'): array
     {
         $qb = $this->createQueryBuilder('proveedor');
 
@@ -59,8 +59,16 @@ class ProveedorRepository extends ServiceEntityRepository
             ;
         }
 
+        match ($orden) {
+            'created_desc' => $qb->orderBy('proveedor.createdAt', 'DESC'),
+            'created_asc' => $qb->orderBy('proveedor.createdAt', 'ASC'),
+            'updated_desc' => $qb->orderBy('proveedor.updatedAt', 'DESC'),
+            'updated_asc' => $qb->orderBy('proveedor.updatedAt', 'ASC'),
+            default => $qb->orderBy('proveedor.nombre', 'ASC'),
+
+        };
+
         return $qb
-            ->orderBy('proveedor.nombre', 'ASC')
             ->addOrderBy('proveedor.id', 'ASC')
             ->getQuery()
             ->getResult()

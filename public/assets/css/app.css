@@ -429,7 +429,7 @@ a {
 
 .filters-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr auto;
     gap: 16px;
     align-items: end;
 }

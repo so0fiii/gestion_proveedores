@@ -22,14 +22,16 @@ class ProveedorController extends AbstractController
         $busqueda = trim((string) $request->query->get('busqueda', ''));
         $tipo = (string) $request->query->get('tipo', '');
         $estado = (string) $request->query->get('estado', '');
+        $orden = (string) $request->query->get('orden', 'nombre_asc');
 
         return $this->render('proveedor/listado.html.twig', [
-            'proveedores' => $proveedorRepository->findByFilters($busqueda, $tipo, $estado),
+            'proveedores' => $proveedorRepository->findByFilters($busqueda, $tipo, $estado, $orden),
             'tipos_proveedor' => TipoProveedor::cases(),
             'filtros' => [
                 'busqueda' => $busqueda,
                 'tipo' => $tipo,
                 'estado' => $estado,
+                'orden' => $orden,
             ],
         ]);
     }
