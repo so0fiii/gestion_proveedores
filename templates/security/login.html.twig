@@ -4,6 +4,69 @@
 {% block header %}{% endblock %}
 {% block body %}
     <section class="login-page">
+
+        <div class="login-background" aria-hidden="true">
+            <svg class="login-rings" viewBox="0 0 1600 1000" preserveAspectRatio="xMinYMid meet">
+                <circle class="login-ring login-ring--one" cx="400" cy="380" r="90"></circle>
+                <circle class="login-ring login-ring--one" cx="290" cy="280" r="90"></circle>
+                <circle class="login-ring login-ring--one" cx="415" cy="250" r="70"></circle>
+
+                <circle class="login-ring login-ring--one" cx="400" cy="380" r="80"></circle>
+                <circle class="login-ring login-ring--one" cx="290" cy="280" r="80"></circle>
+                <circle class="login-ring login-ring--one" cx="415" cy="250" r="60"></circle>
+
+                <circle class="login-ring login-ring--one" cx="260" cy="420" r="85"></circle>
+                <circle class="login-ring login-ring--one" cx="260" cy="420" r="75"></circle>
+
+                <circle class="login-ring login-ring--one" cx="170" cy="330" r="70"></circle>
+                <circle class="login-ring login-ring--one" cx="170" cy="330" r="60"></circle>
+
+                <circle class="login-ring login-ring--one" cx="140" cy="430" r="50"></circle>
+                <circle class="login-ring login-ring--one" cx="140" cy="430" r="60"></circle>
+
+                <circle class="login-ring login-ring--one" cx="360" cy="510" r="70"></circle>
+                <circle class="login-ring login-ring--one" cx="360" cy="510" r="80"></circle>
+
+                <circle class="login-ring login-ring--one" cx="80" cy="360" r="40"></circle>
+                <circle class="login-ring login-ring--one" cx="80" cy="360" r="50"></circle>
+
+
+                <circle class="login-ring login-ring--one" cx="1170" cy="480" r="110"></circle>
+                <circle class="login-ring login-ring--one" cx="1250" cy="320" r="110"></circle>
+                <circle class="login-ring login-ring--one" cx="1350" cy="470" r="110"></circle>
+
+                <circle class="login-ring login-ring--one" cx="1170" cy="480" r="100"></circle>
+                <circle class="login-ring login-ring--one" cx="1250" cy="320" r="100"></circle>
+                <circle class="login-ring login-ring--one" cx="1350" cy="470" r="100"></circle>
+
+                <circle class="login-ring login-ring--one" cx="1400" cy="330" r="60"></circle>
+                <circle class="login-ring login-ring--one" cx="1400" cy="330" r="70"></circle>
+
+                <circle class="login-ring login-ring--one" cx="1460" cy="405" r="50"></circle>
+                <circle class="login-ring login-ring--one" cx="1460" cy="405" r="40"></circle>
+
+                <circle class="login-ring login-ring--one" cx="1480" cy="340" r="20"></circle>
+                <circle class="login-ring login-ring--one" cx="1480" cy="340" r="30"></circle>
+
+                <circle class="login-ring login-ring--one" cx="1530" cy="375" r="30"></circle>
+                <circle class="login-ring login-ring--one" cx="1530" cy="375" r="40"></circle>
+
+
+                <circle class="login-ring login-ring--one" cx="700" cy="670" r="80"></circle>
+                <circle class="login-ring login-ring--one" cx="805" cy="770" r="80"></circle>
+                <circle class="login-ring login-ring--one" cx="840" cy="630" r="80"></circle>
+
+                <circle class="login-ring login-ring--one" cx="700" cy="670" r="90"></circle>
+                <circle class="login-ring login-ring--one" cx="805" cy="770" r="90"></circle>
+                <circle class="login-ring login-ring--one" cx="840" cy="630" r="90"></circle>
+
+
+
+
+
+            </svg>
+        </div>
+
         <form class="login-card" method="post">
             <div class="login-card__header">
                 <h1>GESTIÓN DE PROVEEDORES</h1>
@@ -33,4 +96,9 @@
             </button>
         </form>
     </section>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 {% endblock %}

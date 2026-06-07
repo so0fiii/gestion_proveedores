@@ -440,18 +440,28 @@ a {
 
 /*pantalla inicio de sesion*/
 .login-page {
-    min-height: 80vh;
-    display: grid;
-    place-items: center;
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 24px;
 }
 
+body:has(.login-page) {
+    overflow: hidden;
+}
+
 .login-card {
+    position: relative;
+    z-index: 1;
     width: min(100%, 500px);
     padding: 36px 40px;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
+    transform: translateY(-24px);
 }
 
 .login-card__header {
@@ -723,4 +733,36 @@ a {
     .filters-actions {
         grid-template-columns: 1fr;
     }
+}
+
+.login-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.login-rings {
+    width: 100%;
+    height: 100%;
+}
+
+.login-ring {
+    fill: none;
+    stroke: #8b8cf6;
+    stroke-width: 6;
+    opacity: 0.12;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.login-card {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 500px);
+    padding: 36px 40px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
 }
