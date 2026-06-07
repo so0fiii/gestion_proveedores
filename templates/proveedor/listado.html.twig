@@ -1,121 +1,125 @@
 {# Hereda el layout general de la aplicacion. #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Listado de proveedores{% endblock %}
+{% block title %}Proveedores{% endblock %}
 
 {% block body %}
-    <section class="page-header">
-        <div>
-            <p class="page-kicker">Panel de administracion</p>
-            <h1>Listado de proveedores</h1>
-        </div>
-        <a class="button button--primary" href="{{ path('proveedor_nuevo') }}">
-            Nuevo proveedor
-        </a>
-    </section>
-
-    <form class="filters-panel" method="get" action="{{ path('proveedor_listado')}}">
-        <div class="filters-grid">
-            <div class="form-field">
-                <label for="busqueda">Buscar</label>
-                <input
-                    type="search"
-                    id="busqueda"
-                    name="busqueda"
-                    value="{{ filtros.busqueda }}"
-                    placeholder="Nombre, correo o telefono"
-                >
+    <div class="page-wide">
+        <section class="page-header">
+            <div>
+                <p class="page-kicker">Panel de administración</p>
+                <h1>Proveedores</h1>
+                <h2>Selecciona un proveedor para consultar sus datos de contacto</h2>
             </div>
 
-            <div class="form-field">
-                <label for="tipo">Tipo</label>
-                <select id="tipo" name="tipo">
-                    <option value="">Todos</option>
-                    {% for tipo in tipos_proveedor %}
-                        <option value="{{ tipo.value }}" {% if filtros.tipo == tipo.value %}selected{% endif %}>
-                            {{ tipo.label }}
-                        </option>
-                    {% endfor %}
-                </select>
+            <a class="button button--primary" href="{{ path('proveedor_nuevo') }}">
+                Nuevo proveedor
+            </a>
+        </section>
+
+        <form class="filters-panel" method="get" action="{{ path('proveedor_listado')}}">
+            <div class="filters-grid">
+                <div class="form-field">
+                    <label for="busqueda">Buscar</label>
+                    <input
+                        type="search"
+                        id="busqueda"
+                        name="busqueda"
+                        value="{{ filtros.busqueda }}"
+                        placeholder="Nombre, correo o teléfono"
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo" name="tipo">
+                        <option value="">Todos</option>
+                        {% for tipo in tipos_proveedor %}
+                            <option value="{{ tipo.value }}" {% if filtros.tipo == tipo.value %}selected{% endif %}>
+                                {{ tipo.label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="estado">Estado</label>
+                    <select id="estado" name="estado">
+                        <option value="">Todos</option>
+                        <option value="activo" {% if filtros.estado == 'activo' %}selected{% endif %}>Activos</option>
+                        <option value="inactivo" {% if filtros.estado == 'inactivo' %}selected{% endif %}>Inactivos</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="orden">Ordenar por</label>
+                    <select id="orden" name="orden">
+                        <option value="nombre_asc" {% if filtros.orden == 'nombre_asc' %}selected{% endif %}>Nombre A-Z</option>
+                        <option value="created_desc" {% if filtros.orden == 'created_desc' %}selected{% endif %}>Alta más reciente</option>
+                        <option value="created_asc" {% if filtros.orden == 'created_asc' %}selected{% endif %}>Alta más antigua</option>
+                        <option value="updated_desc" {% if filtros.orden == 'updated_desc' %}selected{% endif %}>Actualización más reciente</option>
+                        <option value="updated_asc" {% if filtros.orden == 'updated_asc' %}selected{% endif %}>Actualización más antigua</option>
+                    </select>
+                </div>
+
+
+                <div class="filters-actions">
+                    <button class="button button--primary" type="submit">
+                        Filtrar
+                    </button>
+
+                    <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
+                        Limpiar
+                    </a>
+                </div>
             </div>
+        </form>
 
-            <div class="form-field">
-                <label for="estado">Estado</label>
-                <select id="estado" name="estado">
-                    <option value="">Todos</option>
-                    <option value="activo" {% if filtros.estado == 'activo' %}selected{% endif %}>Activos</option>
-                    <option value="inactivo" {% if filtros.estado == 'inactivo' %}selected{% endif %}>Inactivos</option>
-                </select>
+
+        {# Si no hay proveedores, mostramos un estado vacio. #}
+        {% if proveedores is empty %}
+            <div class="empty-state">
+                <h2>No hay proveedores registrados</h2>
+                <p>Cuando se creen proveedores apareceran listados en esta pantalla.</p>
             </div>
-
-            <div class="form-field">
-                <label for="orden">Ordenar por</label>
-                <select id="orden" name="orden">
-                    <option value="nombre_asc" {% if filtros.orden == 'nombre_asc' %}selected{% endif %}>Nombre A-Z</option>
-                    <option value="created_desc" {% if filtros.orden == 'created_desc' %}selected{% endif %}>Creacion mas reciente</option>
-                    <option value="created_asc" {% if filtros.orden == 'created_asc' %}selected{% endif %}>Creacion mas antigua</option>
-                    <option value="updated_desc" {% if filtros.orden == 'updated_desc' %}selected{% endif %}>Ultima modificacion reciente</option>
-                    <option value="updated_asc" {% if filtros.orden == 'updated_asc' %}selected{% endif %}>Ultima modificacion antigua</option>
-                </select>
-            </div>
-
-
-            <div class="filters-actions">
-                <button class="button button--primary" type="submit">
-                    Filtrar
-                </button>
-
-                <a class="button button--secondary" href="{{ path('proveedor_listado') }}">
-                    Limpiar
-                </a>
-            </div>
-        </div>
-    </form>
-
-
-    {# Si no hay proveedores, mostramos un estado vacio. #}
-    {% if proveedores is empty %}
-        <div class="empty-state">
-            <h2>No hay proveedores registrados</h2>
-            <p>Cuando se creen proveedores apareceran listados en esta pantalla.</p>
-        </div>
-    {% else %}
-        {# La tabla queda dentro de un contenedor para permitir scroll horizontal en movil. #}
-        <div class="table-wrapper">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Correo electronico</th>
-                        <th>Telefono</th>
-                        <th>Tipo</th>
-                        <th>Estado</th>
-                        <th>Actualizado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for proveedor in proveedores %}
-                        <tr class="data-table__row data-table__row--clickable" data-href="{{ path('proveedor_detalle', { id: proveedor.id}) }}">
-                            <td>
-                                <a class="row-link" href="{{ path('proveedor_detalle', { id: proveedor.id}) }}">
-                                    {{ proveedor.nombre }}
-                                </a>
-                            </td>
-                            <td>{{ proveedor.email }}</td>
-                            <td>{{ proveedor.telefono }}</td>
-                            <td>{{ proveedor.tipo.label }}</td>
-                            <td>
-                                {% if proveedor.activo %}
-                                    <span class="status status--active">Activo</span>
-                                {% else %}
-                                    <span class="status status--inactive">Inactivo</span>
-                                {% endif %}
-                            </td>
-                            <td>{{ proveedor.updatedAt|date('d/m/Y H:i') }}</td>
+        {% else %}
+            {# La tabla queda dentro de un contenedor para permitir scroll horizontal en movil. #}
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo electronico</th>
+                            <th>Telefono</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Actualizado</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% endif %}
+                    </thead>
+                    <tbody>
+                        {% for proveedor in proveedores %}
+                            <tr class="data-table__row data-table__row--clickable" data-href="{{ path('proveedor_detalle', { id: proveedor.id}) }}">
+                                <td>
+                                    <a class="row-link" href="{{ path('proveedor_detalle', { id: proveedor.id}) }}">
+                                        {{ proveedor.nombre }}
+                                    </a>
+                                </td>
+                                <td>{{ proveedor.email }}</td>
+                                <td>{{ proveedor.telefono }}</td>
+                                <td>{{ proveedor.tipo.label }}</td>
+                                <td>
+                                    {% if proveedor.activo %}
+                                        <span class="status status--active">Activo</span>
+                                    {% else %}
+                                        <span class="status status--inactive">Inactivo</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ proveedor.updatedAt|date('d/m/Y H:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
