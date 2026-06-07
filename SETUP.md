@@ -71,8 +71,10 @@ Este paso es opcional. Sirve para probar el listado, los filtros y la ordenacion
 ## 8. Arrancar la aplicacion
 
 ```bash
-php -S localhost:8000 -t public
+php -S 0.0.0.0:8000 -t public
 ```
+
+De esta forma podemos acceder tambien por movil para revisar responsive.
 
 ## 9. Acceder a la aplicacion
 
