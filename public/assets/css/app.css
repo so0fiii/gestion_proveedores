@@ -682,6 +682,11 @@ body:has(.login-page) {
 }
 
 @media (max-width: 640px) {
+
+    .login-background {
+        display: none;
+    }
+
     .site-header {
         display: none;
     }
